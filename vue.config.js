@@ -11,4 +11,7 @@ module.exports = {
       return argumentwebpack;
     });
   },
+  devServer: {
+    port: 3200,
+  },
 };
