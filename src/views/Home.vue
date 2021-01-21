@@ -25,7 +25,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue';
-import { reactive, toRefs, computed } from 'vue';
+import { reactive, toRefs, computed, watch } from 'vue';
 import getListPokemon from '../http/poke-request';
 
 // Referensi reactive property
@@ -96,6 +96,15 @@ export default {
 
     // Jalankan terlebih dahulu
     getDataPokemonList();
+
+    // Tes watch composition api
+    watch(
+      () => stateData.searchKeyText,
+      (newtext, oldtext) => {
+        console.log('Nilai lama ', oldtext);
+        console.log('Nilai baru ', newtext);
+      },
+    );
 
     return {
       ...toRefs(stateData),
