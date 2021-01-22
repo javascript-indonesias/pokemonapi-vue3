@@ -16,7 +16,9 @@
         :key="index"
         class="ml-4 text-2xl text-blue-500"
       >
-        {{ pokemon.name }}
+        <router-link v-bind:to="`/about/${urlIdLookup[pokemon.name]}`">
+          {{ pokemon.name }}
+        </router-link>
       </div>
     </div>
   </div>
@@ -35,7 +37,6 @@ import getListPokemon from '../http/poke-request';
 
 export default {
   name: 'Home',
-  components: {},
   setup() {
     // Composition API https://v3.vuejs.org/guide/composition-api-introduction.html
     // Di sini fungsi dijalankan pertama kali sebelum
