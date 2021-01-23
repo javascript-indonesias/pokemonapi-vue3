@@ -1,6 +1,6 @@
 # Pokemon API dengan Programming With Erik
 
-Latihan menggunakan Composition API dari Program With Erik.
+Latihan menggunakan Composition API Vue JS 3 dari Program With Erik.
 [https://github.com/ErikCH/PokemonVue](https://github.com/ErikCH/PokemonVue)
 
 ## Project setup

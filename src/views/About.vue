@@ -9,7 +9,7 @@
 // https://next.router.vuejs.org/guide/advanced/composition-api.html#accessing-the-router-and-current-route-inside-setup
 
 import { useRoute } from 'vue-router';
-import { reactive, toRefs } from 'vue';
+import { reactive, toRefs, onMounted } from 'vue';
 
 export default {
   name: 'About',
@@ -29,7 +29,7 @@ export default {
   setup() {
     const route = useRoute();
 
-    const state = reactive({
+    const stateData = reactive({
       pokemonItem: {},
     });
 
@@ -45,13 +45,19 @@ export default {
         })
         .then(value => {
           console.log(value);
+          stateData.pokemonItem = value;
         })
         .catch(error => {
           console.log(error);
         });
     };
 
-    return { ...toRefs(state), getDataDetailPokemon };
+    // dipanggil ketika mounted
+    onMounted(() => {
+      getDataDetailPokemon();
+    });
+
+    return { ...toRefs(stateData), getDataDetailPokemon };
   },
 };
 </script>
