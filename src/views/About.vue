@@ -1,7 +1,31 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
-    <p>Slug Data : {{ slugdata }}</p>
+    <div
+      v-if="pokemonItem"
+      class="w-3/12 m-auto bg-purple-100 mt-4 shadow-2xl flex justify-center flex-col items-center"
+    >
+      <h3 class="text-2xl text-green-900 uppercase">{{ pokemonItem.name }}</h3>
+
+      <div class="flex justify-center" v-if="pokemonItem.sprites">
+        <img
+          class="w-48"
+          :src="pokemonItem.sprites.front_shiny"
+          alt="Pokemon fronts"
+          loading="lazy"
+        />
+        <img
+          class="w-48"
+          :src="pokemonItem.sprites.back_shiny"
+          alt="Pokemon backs"
+          loading="lazy"
+        />
+      </div>
+
+      <h3 class="text-yellow-500">Types</h3>
+      <div v-for="(item, index) in pokemonItem.types" :key="index">
+        <h5 class="text-blue-800">{{ item.type.name }}</h5>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -13,19 +37,6 @@ import { reactive, toRefs, onMounted } from 'vue';
 
 export default {
   name: 'About',
-  data() {
-    return {
-      slugdata: '',
-    };
-  },
-  mounted() {
-    this.getDataRouter();
-  },
-  methods: {
-    getDataRouter() {
-      this.slugdata = this.$route.params.slug;
-    },
-  },
   setup() {
     const route = useRoute();
 
@@ -44,11 +55,10 @@ export default {
           return Promise.reject(new Error(`Error mengambil response ${response.status}`));
         })
         .then(value => {
-          console.log(value);
           stateData.pokemonItem = value;
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          stateData.pokemonItem = {};
         });
     };
 
