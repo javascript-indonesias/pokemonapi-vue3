@@ -14,4 +14,5 @@ module.exports = {
   devServer: {
     port: 3200,
   },
+  publicPath: process.env.NODE_ENV === 'production' ? '/vue3-pokemon-search/' : '/',
 };
